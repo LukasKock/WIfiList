@@ -117,10 +117,29 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList<String> deviceList = new ArrayList<>();
 
+        //Cutting unnecessary strings
         for (int i=0; i<networks.size();i++) {
             String[] separated = (networks.get(i).toString()).split(", BSSID:");
             deviceList.add(separated[0]);
 //            deviceList.add(networks.get(i).toString());
+        }
+        //removing empty SSIDs
+        for(int i=0; i<deviceList.size();i++){
+            if((deviceList.get(i).equals("SSID: ")) || (deviceList.get(i).equals("SSID: \"\"")) || (deviceList.get(i).equals("SSID:"))){
+                deviceList.remove(i);
+            }
+        }
+        //removing repeated SSID (Because they have different BSSID - Will it work later?)
+        for(int i = 0; i<deviceList.size(); i++){
+            for(int b = 0;b<deviceList.size();b++){
+                if (b != i) {
+                    if((deviceList.get(i)).equals(deviceList.get(b))){
+                        deviceList.remove(b);
+                        b = b - 1;
+                    }
+                }
+
+            }
         }
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, deviceList.toArray());
         wifiList.setAdapter(arrayAdapter);
