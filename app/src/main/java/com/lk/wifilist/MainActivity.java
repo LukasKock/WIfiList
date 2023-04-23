@@ -127,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
         for(int i=0; i<deviceList.size();i++){
             if((deviceList.get(i).equals("SSID: ")) || (deviceList.get(i).equals("SSID: \"\"")) || (deviceList.get(i).equals("SSID:"))){
                 deviceList.remove(i);
+                i = i -1;
             }
         }
         //removing repeated SSID (Because they have different BSSID - Will it work later?)
@@ -138,7 +139,6 @@ public class MainActivity extends AppCompatActivity {
                         b = b - 1;
                     }
                 }
-
             }
         }
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, deviceList.toArray());
