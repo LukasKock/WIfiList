@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
         for(int i=0; i<deviceList.size();i++){
             if((deviceList.get(i).equals("SSID: ")) || (deviceList.get(i).equals("SSID: \"\"")) || (deviceList.get(i).equals("SSID:"))){
                 deviceList.remove(i);
-                i = i -1;
+                i = 0;
             }
         }
         //removing repeated SSID (Because they have different BSSID - Will it work later?)
@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
                 if (b != i) {
                     if((deviceList.get(i)).equals(deviceList.get(b))){
                         deviceList.remove(b);
-                        b = b - 1;
+                        b = 0;
                     }
                 }
             }
