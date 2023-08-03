@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList<String> deviceList = new ArrayList<>();
 
-        //Cutting unnecessary strings
+        //Adding networks to deviceList and Cutting unnecessary strings
         for (int i=0; i<networks.size();i++) {
             String[] separated = (networks.get(i).toString()).split(", BSSID:");
             deviceList.add(separated[0]);
