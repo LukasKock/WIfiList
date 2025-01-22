@@ -10,8 +10,6 @@ import android.content.pm.PackageManager;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -46,14 +44,8 @@ public class MainActivity extends AppCompatActivity {
                 permissionsGranted();
             }
         });
-        wifiList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                //Toast.makeText(MainActivity.this, "You chose item: " + i, Toast.LENGTH_SHORT).show();
-                Toast.makeText(MainActivity.this, "Text:" + adapterView.getItemAtPosition(i), Toast.LENGTH_SHORT).show();
-            }
-        });
-
+        wifiList.setOnItemClickListener((adapterView, view, i, l) ->
+                Toast.makeText(MainActivity.this, "Text:" + adapterView.getItemAtPosition(i), Toast.LENGTH_SHORT).show());
     }
 
     @Override
@@ -121,7 +113,6 @@ public class MainActivity extends AppCompatActivity {
         for (int i=0; i<networks.size();i++) {
             String[] separated = (networks.get(i).toString()).split(", BSSID:");
             deviceList.add(separated[0]);
-//            deviceList.add(networks.get(i).toString());
         }
         //removing empty SSIDs
         for(int i=0; i<deviceList.size();i++){
@@ -141,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, deviceList.toArray());
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, deviceList.toArray());
         wifiList.setAdapter(arrayAdapter);
     }
 }
